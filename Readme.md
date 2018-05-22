@@ -10,7 +10,7 @@ Let's start by taking a quick look at the tech involved.
 
 ## GraphQL
 
-Compared to REST, GraphQL is the new kid on the block, but I think the improvements are so big that I'm moving any new APIs I write to use it.  I've seen so many APIs that returned huge amounts of data when all the user needed was a set of identifiers to loop through and query a second endpoint for some other data related to those identifiers.  Just writing that sounds mad, I just want to make one call to the API and get everything and only what I need.
+Compared to REST, GraphQL is the new kid on the block, but I think the improvements are so big that I'm moving any new APIs I write to use it.  I've seen so many APIs that returned huge amounts of data when all the user needed was a set of identifiers to loop through and query a second endpoint for some other data related to those identifiers, which highlights the second issue.  Just writing that sounds mad, I just want to make one call to the API and get everything and only what I need.
 
 I won't go into much detail on why GraphQL is better, there's lots of articles out there that will let you decide that for yourself.  All I will say is, there are two big reasons I've decided to make the switch: the ability to easily include in your request the structure of the data you want to receive; and the ability to combine what would have been multiple REST requests into a single GraphQL query.  Both are huge improvements over REST.  Sure, you could try and write your REST endpoints this way, but then they really wouldn't be REST anymore and GraphQL is built to work this way.
 
@@ -18,11 +18,11 @@ Ok now that is out of the way, let's get on with writing some code.  We're going
 
 ## Spring Boot
 
-Coming from a largely PHP background, I've only recently discovered the joy of the Spring framework and Spring Boot in particular.  It makes setting up a new project extremely easy; taking an opinionated view of how to configure and structure a lot of the traditional boilerplate code for controllers, data access etc but will get out of the way when you want to configure it how you want.  In this example, we won't need to write any controllers; just our entity model, types and the GraphQL schema.
+Coming from a largely PHP background, I've only recently discovered the joy of the Spring framework and Spring Boot in particular.  It makes setting up a new project extremely easy; taking an opinionated view of how to configure and structure a lot of the traditional boilerplate code for controllers, data access, etc, but will get out of the way when you want to configure it how you want.  In this example, we won't need to write any controllers; just our entity model, types and the GraphQL schema.
 
 ## Pre-requisites
 
-For this project, we're going to use Java 8, I tried with Java 10 and then 9, but there's an issue with the lombok dependancy so had to fallback to 8 for this tutorial.  I'll update it to 10 when that's fixed.  We'll use Spring Boot 2 which uses version 5 of the Spring Framework and sets it all up for you.  For simplicity, we'll also use the Maven build framework for managing our java dependencies.  We'll also use the excellent GraphQL-Java library spring boot starter to give us the GraphQL and GraphIQL endpoints (more on that later).  Finally, I've added Project Lombok which allows you to annotate classes, methods, variables, etc to provide boilerplate functionality.
+For this project, we're going to use Java 8, I tried with Java 10 and then 9, but there's an [issue with the lombok dependancy](https://github.com/rzwitserloot/lombok/issues/1572) so had to fallback to 8 for this tutorial.  I'll update it to 10 when that's fixed.  We'll use Spring Boot 2 which uses version 5 of the Spring Framework and sets it all up for you.  For simplicity, we'll also use the Maven build framework for managing our java dependencies.  We'll also use the excellent GraphQL-Java library spring boot starter to give us the GraphQL and GraphIQL endpoints (more on that later).  Finally, I've added Project Lombok which allows you to annotate classes, methods, variables, etc to provide boilerplate functionality.
 
 Here are the exact versions I'll be using:
 
@@ -37,7 +37,7 @@ Here are the exact versions I'll be using:
 
 All of the code for this tutorial can be found on [GitHub](https://github.com/sambenskin/graphql-spring-boot-tutorial)
 
-First of all, create a new folder and open it in your chosen IDE.  I'm using [Microsoft Visual Studio Code](https://code.visualstudio.com/).  Anyone who's just raised their eyebrows at the mention of Microsoft needs to get in the present and check it out; it really is the best free code editor out there, sorry Atom.
+First of all, create a new folder and open it in your chosen IDE.  I'm using [Microsoft Visual Studio Code](https://code.visualstudio.com/).  It really is the best free code editor out there, sorry Atom.
 
 Create a new file called pom.xml and put this inside:
 
@@ -64,7 +64,7 @@ Create a new file called pom.xml and put this inside:
         <properties>
             <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
             <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-            <java.version>8</java.version>
+            <java.version>1.8</java.version>
         </properties>
 
         <dependencies>
@@ -217,7 +217,7 @@ And here's the content
         MAMMOTH
     }
 
-That's defined our enum, now onto the Pets
+That's defined our enum, now onto the Pet entity model
 
 Create this folder
 
