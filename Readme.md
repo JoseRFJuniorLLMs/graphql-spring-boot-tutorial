@@ -1,6 +1,6 @@
 ---
 title: HowTo: Build GraphQL Services in Java with Spring Boot - Part 1
-published: false
+published: true
 description: A tutorial for building a simple GraphQL service in Java with Spring Boot
 tags: beginners, graphql, java, springboot
 ---
@@ -279,7 +279,7 @@ And fill it with this
             aPet.setType(Animal.MAMMOTH);
 
             pets.add(aPet);
-            
+
             return pets;
         }
     }
