@@ -1,6 +1,6 @@
 ---
 title: HowTo: Integrate a MySQL Database into your Java Spring Boot GraphQL Service
-published: false
+published: true
 description: A tutorial for integrating a MySQL database into a simple GraphQL service in Java Spring Boot using the Spring Data JPA
 tags: beginners, graphql, java, mysql
 ---
@@ -110,8 +110,7 @@ The repository acts as our interface between the pet model instance and the data
 
 Create this file
 
-    
-src/main/java/uk/co/benskin/graphql_spring_boot_tutorial/repositories/PetRepository.java
+    src/main/java/uk/co/benskin/graphql_spring_boot_tutorial/repositories/PetRepository.java
 
 Then add this contents:
 
@@ -160,21 +159,20 @@ Great! Those annotations tell Spring Data JPA that it can persist this entity to
 Finally we need to update our GraphQL Query resolver in Query.java from a hard-coded array to fetching all pets from the repository.  Replace the contents of the file with the following:
 
     package uk.co.benskin.graphql_spring_boot_tutorial.resolvers;
-    
+
     import com.coxautodev.graphql.tools.GraphQLQueryResolver;
     import org.springframework.stereotype.Component;
+
+    import lombok.RequiredArgsConstructor;
     import uk.co.benskin.graphql_spring_boot_tutorial.entities.Pet;
     import uk.co.benskin.graphql_spring_boot_tutorial.repositories.PetRepository;
-    
+
     @Component
+    @RequiredArgsConstructor
     public class Query implements GraphQLQueryResolver {
-    
-        private PetRepository PetRepository;
-        
-        public Query(PetRepository PetRepository) {
-            this.PetRepository = PetRepository;
-        }
-        
+
+        private final PetRepository PetRepository;
+
         public Iterable<Pet> pets() {
             return PetRepository.findAll();
         }
@@ -189,7 +187,7 @@ Navigate to [http://localhost:8080/graphiql](http://localhost:8080/graphiql) and
 Run this query:
 
     {
-	pets {
+	    pets {
             name,
             age,
             type
